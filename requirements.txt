@@ -1,0 +1,4 @@
+pyocclient==0.6
+python-dotenv==1.0.1
+requests==2.32.3
+
