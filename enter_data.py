@@ -1,4 +1,3 @@
-
 FILES_ENDPOINTS = {
     "files": [
         {

@@ -52,11 +52,12 @@ pip install -r requirements.txt
 Создайте .env файл и заполните своими данными:
 ```
 FTP_HOST=ftp.automiq.ru
-FTP_USERNAME=
-FTP_PASSWORD=
+FTP_USERNAME=test240809
+FTP_PASSWORD=D6vCrSfD
+FTP_PATH=\
 
 CLOUD_URL=https://fs.automiq.ru/owncloud/index.php/s/Vfe40mHsvvWKxAZ
-CLOUD_PASSWORD=
+CLOUD_PASSWORD=D6vCrSfD
 
 FOLDER_NAME=/tmp/test-240809/
 ```

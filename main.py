@@ -48,35 +48,46 @@ def main():
         "url": os.getenv("CLOUD_URL"),
         "password": os.getenv("CLOUD_PASSWORD")
     }
+    files_for_folder = []
+    files_for_ftp = []
+    files_for_cloud = []
     for file_info in FILES_ENDPOINTS["files"]:
         src_file = Path(args.src) / file_info["name"]
         for endpoint in file_info["endpoints"]:
             if endpoint == "folder":
-                dest_path = str(BASE_DIR) + (os.getenv("FOLDER_NAME"))
-                delivery = LocalFileDelivery(
-                    src_file,
-                    dest_path,
-                    override=args.override,
-                    dry_run=args.dry
-                )
+                files_for_folder.append(src_file)
             elif endpoint == "ftp":
-                delivery = FTPFileDelivery(
-                    src_file, "/", ftp_details,
-                    override=args.override,
-                    dry_run=args.dry
-                )
+                files_for_ftp.append(src_file)
             elif endpoint == "owncloud":
-                delivery = OwnCloudFileDelivery(
-                    src_file,
-                    owncloud_details,
-                    override=args.override,
-                    dry_run=args.dry
-                )
+                files_for_cloud.append(src_file)
             else:
                 print(f"Unknown endpoint: {endpoint}")
                 continue
-
-            delivery.deliver_file()
+    if files_for_folder:
+        folder_delivery = LocalFileDelivery(
+            files_for_folder,
+            str(BASE_DIR) + (os.getenv("FOLDER_NAME")),
+            override=args.override,
+            dry_run=args.dry
+        )
+        folder_delivery.deliver_files()
+    if files_for_ftp:
+        ftp_delivery = FTPFileDelivery(
+            files_for_ftp,
+            os.getenv("FTP_PATH"),
+            ftp_details,
+            override=args.override,
+            dry_run=args.dry
+        )
+        ftp_delivery.deliver_files()
+    if files_for_cloud:
+        cloud_delivery = OwnCloudFileDelivery(
+            files_for_cloud,
+            owncloud_details,
+            override=args.override,
+            dry_run=args.dry
+        )
+        cloud_delivery.deliver_files()
 
 
 if __name__ == "__main__":
