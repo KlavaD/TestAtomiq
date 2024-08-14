@@ -16,22 +16,15 @@ def configure_argument_parser():
     parser = argparse.ArgumentParser(
         description="Доставка файлов по нескольким маршрутам."
     )
-    parser.add_argument(
-        "src",
-        type=str,
-        help="Путь до исходных файлов."
-    )
+    parser.add_argument("src", type=str, help="Путь до исходных файлов.")
     parser.add_argument(
         "-o",
         "--override",
         action="store_true",
-        help="Перезаписать имеющийся файл."
+        help="Перезаписать имеющийся файл.",
     )
     parser.add_argument(
-        "-d",
-        "--dry",
-        action="store_true",
-        help="Запуск в режиме 'DRY'."
+        "-d", "--dry", action="store_true", help="Запуск в режиме 'DRY'."
     )
     return parser
 
@@ -42,11 +35,11 @@ def main():
     ftp_details = {
         "host": os.getenv("FTP_HOST"),
         "username": os.getenv("FTP_USERNAME"),
-        "password": os.getenv("FTP_PASSWORD")
+        "password": os.getenv("FTP_PASSWORD"),
     }
     owncloud_details = {
         "url": os.getenv("CLOUD_URL"),
-        "password": os.getenv("CLOUD_PASSWORD")
+        "password": os.getenv("CLOUD_PASSWORD"),
     }
     files_for_folder = []
     files_for_ftp = []
@@ -68,7 +61,7 @@ def main():
             files_for_folder,
             str(BASE_DIR) + (os.getenv("FOLDER_NAME")),
             override=args.override,
-            dry_run=args.dry
+            dry_run=args.dry,
         )
         folder_delivery.deliver_files()
     if files_for_ftp:
@@ -77,7 +70,7 @@ def main():
             os.getenv("FTP_PATH"),
             ftp_details,
             override=args.override,
-            dry_run=args.dry
+            dry_run=args.dry,
         )
         ftp_delivery.deliver_files()
     if files_for_cloud:
@@ -85,7 +78,7 @@ def main():
             files_for_cloud,
             owncloud_details,
             override=args.override,
-            dry_run=args.dry
+            dry_run=args.dry,
         )
         cloud_delivery.deliver_files()
 

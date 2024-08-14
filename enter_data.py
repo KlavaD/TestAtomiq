@@ -11,6 +11,6 @@ FILES_ENDPOINTS = {
         {
             "name": "file3.txt",
             "endpoints": ["folder", "owncloud", "ftp"],
-        }
+        },
     ]
 }
