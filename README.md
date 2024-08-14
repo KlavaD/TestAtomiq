@@ -5,7 +5,7 @@
 
 **Инструменты и стек:**
 
-[Python](https://www.python.org/) 
+[Python](https://www.python.org/),
 [requests](https://pypi.org/project/requests/),
 [pyocclient](https://github.com/owncloud/pyocclient/tree/master),
 
